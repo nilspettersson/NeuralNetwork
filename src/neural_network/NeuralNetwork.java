@@ -3,6 +3,9 @@ package neural_network;
 import java.util.ArrayList;
 
 public class NeuralNetwork {
+	public static final int STEP_FUNCTION=1;
+	public static final int RELU_FUNCTION=1;
+	
 	private int inputSize;
 	
 	private ArrayList<Layer>layers=new ArrayList<>();

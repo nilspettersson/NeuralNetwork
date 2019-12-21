@@ -8,7 +8,7 @@ public class NeuralnetTest1 {
 		NeuralNetwork nn=new NeuralNetwork(1);
 		nn.addLayer(1, 0);
 		nn.addLayer(2, 0);
-		nn.addLayer(1, 0);
+		nn.addLayer(1, NeuralNetwork.STEP_FUNCTION);
 		nn.print();
 		
 		System.out.println("");

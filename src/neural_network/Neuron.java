@@ -26,6 +26,20 @@ public class Neuron {
 			}
 			output+=bias;
 		}
+		else if(activation==NeuralNetwork.STEP_FUNCTION) {
+			for(int i=0;i<inputs.length;i++) {
+				output+=inputs[i]*weights.get(i);
+			}
+			output+=bias;
+			
+			if(output>=0.5) {
+				output=1;
+			}
+			else {
+				output=0;
+			}
+		}
+		
 		value=output;
 		return output;
 	}
@@ -38,6 +52,32 @@ public class Neuron {
 				output+=inputs.get(i).value*weights.get(i);
 			}
 			output+=bias;
+		}
+		else if(activation==NeuralNetwork.STEP_FUNCTION) {
+			for(int i=0;i<inputs.size();i++) {
+				output+=inputs.get(i).value*weights.get(i);
+			}
+			output+=bias;
+			
+			if(output>=0.5) {
+				output=1;
+			}
+			else {
+				output=0;
+			}
+		}
+		else if(activation==NeuralNetwork.RELU_FUNCTION) {
+			for(int i=0;i<inputs.size();i++) {
+				output+=inputs.get(i).value*weights.get(i);
+			}
+			output+=bias;
+			
+			if(output<=0) {
+				output=0;
+			}
+			else {
+				
+			}
 		}
 		value=output;
 		return output;
@@ -59,6 +99,9 @@ public class Neuron {
 	public void print() {
 		if(activation==0) {
 			System.out.println("activation: "+"no activation");
+		}
+		if(activation==NeuralNetwork.STEP_FUNCTION) {
+			System.out.println("activation: "+"STEP_FUNCTION");
 		}
 		
 		System.out.println("bias: "+bias);
