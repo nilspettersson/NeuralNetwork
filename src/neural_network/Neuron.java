@@ -10,22 +10,37 @@ public class Neuron {
 	private ArrayList<Double>weights=new ArrayList<Double>();
 	private double bias;
 	
-	public Neuron(int activation) {
+	public Neuron(int inputSize,int activation) {
 		bias=Math.random();
 		this.activation=activation;
-		for(int i=0;i<weights.size();i++) {
-			weights.set(i, Math.random());
+		for(int i=0;i<inputSize;i++) {
+			weights.add(Math.random());
 		}
 	}
 	
+	
+	public void calculateOutput(double values[]) {
+		if(activation==0) {
+			for(int i=0;i<values.length;i++) {
+				value+=values[i]*weights.get(i);
+			}
+			value+=bias;
+		}
+	}
+	
+	
 	public void print() {
 		System.out.println("value: "+value);
-		System.out.println("activation: "+activation);
+		if(activation==0) {
+			System.out.println("activation: "+"no activation");
+		}
+		
 		System.out.println("bias: "+bias);
 		System.out.println("WEIGHTS");
 		for(int i=0;i<weights.size();i++) {
 			System.out.println("weight"+i+": "+weights.get(i));
 		}
+		System.out.println("");
 	}
 	
 
