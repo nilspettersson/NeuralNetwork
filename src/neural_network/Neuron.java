@@ -3,8 +3,7 @@ package neural_network;
 import java.util.ArrayList;
 
 public class Neuron {
-	
-	private double value;
+	private double value=0;
 	private int activation;
 	
 	private ArrayList<Double>weights=new ArrayList<Double>();
@@ -19,18 +18,45 @@ public class Neuron {
 	}
 	
 	
-	public void calculateOutput(double values[]) {
+	public double calculateOutput(double inputs[]) {
+		double output=0;
 		if(activation==0) {
-			for(int i=0;i<values.length;i++) {
-				value+=values[i]*weights.get(i);
+			for(int i=0;i<inputs.length;i++) {
+				output+=inputs[i]*weights.get(i);
 			}
-			value+=bias;
+			output+=bias;
 		}
+		value=output;
+		return output;
+	}
+	
+	public double calculateOutput(ArrayList<Neuron>inputs) {
+		double output=0;
+		//System.out.println(inputs.size()+"  "+weights.size());
+		if(activation==0) {
+			for(int i=0;i<inputs.size();i++) {
+				output+=inputs.get(i).value*weights.get(i);
+			}
+			output+=bias;
+		}
+		value=output;
+		return output;
+	}
+	
+	public void train(double inputs[],double label,double learningRate) {
+		double output=calculateOutput(inputs);
+		double error=label-output;
+		for(int i=0;i<inputs.length;i++) {
+			weights.set(i, weights.get(i)+(error*inputs[i]*learningRate));
+		}
+		bias=bias+error*learningRate;
 	}
 	
 	
+	
+	
+	
 	public void print() {
-		System.out.println("value: "+value);
 		if(activation==0) {
 			System.out.println("activation: "+"no activation");
 		}
@@ -44,13 +70,6 @@ public class Neuron {
 	}
 	
 
-	public double getValue() {
-		return value;
-	}
-
-	public void setValue(double value) {
-		this.value = value;
-	}
 
 	public int getActivation() {
 		return activation;
@@ -74,6 +93,16 @@ public class Neuron {
 
 	public void setBias(double bias) {
 		this.bias = bias;
+	}
+
+
+	public double getValue() {
+		return value;
+	}
+
+
+	public void setValue(double value) {
+		this.value = value;
 	}
 	
 	
