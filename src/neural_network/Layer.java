@@ -6,18 +6,13 @@ public class Layer {
 	
 	private ArrayList<Neuron>neurons=new ArrayList<>();
 	
+	private int activation;
 	public Layer(int size, int activation,int inputSize) {
+		this.activation=activation;
 		for(int i=0;i<size;i++) {
 			neurons.add(new Neuron(inputSize, activation));
 		}
 	}
-	
-	/*public double[] toArray() {
-		double[] array=new double[neurons.size()];
-		for(int i=0;i<neurons.size();i++) {
-			array[i]=neurons.get(i).
-		}
-	}*/
 	
 
 	public ArrayList<Neuron> getNeurons() {
@@ -26,6 +21,14 @@ public class Layer {
 
 	public void setNeurons(ArrayList<Neuron> neurons) {
 		this.neurons = neurons;
+	}
+
+	public int getActivation() {
+		return activation;
+	}
+
+	public void setActivation(int activation) {
+		this.activation = activation;
 	}
 	
 	

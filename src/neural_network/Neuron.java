@@ -10,55 +10,22 @@ public class Neuron {
 	private double bias;
 	
 	public Neuron(int inputSize,int activation) {
-		bias=Math.random();
+		bias=(Math.random()*2)-1;
 		this.activation=activation;
 		for(int i=0;i<inputSize;i++) {
-			weights.add(Math.random());
+			weights.add((Math.random()*2)-1);
 		}
 	}
 	
 	
 	public double calculateOutput(double inputs[]) {
 		double output=0;
-		if(activation==0) {
-			for(int i=0;i<inputs.length;i++) {
-				output+=inputs[i]*weights.get(i);
-			}
-			output+=bias;
+		for(int i=0;i<inputs.length;i++) {
+			output+=inputs[i]*weights.get(i);
 		}
-		else if(activation==NeuralNetwork.STEP_FUNCTION) {
-			for(int i=0;i<inputs.length;i++) {
-				output+=inputs[i]*weights.get(i);
-			}
-			output+=bias;
-			
-			if(output>=0.5) {
-				output=1;
-			}
-			else {
-				output=0;
-			}
-		}
+		output+=bias;
 		
-		value=output;
-		return output;
-	}
-	
-	public double calculateOutput(ArrayList<Neuron>inputs) {
-		double output=0;
-		//System.out.println(inputs.size()+"  "+weights.size());
-		if(activation==0) {
-			for(int i=0;i<inputs.size();i++) {
-				output+=inputs.get(i).value*weights.get(i);
-			}
-			output+=bias;
-		}
-		else if(activation==NeuralNetwork.STEP_FUNCTION) {
-			for(int i=0;i<inputs.size();i++) {
-				output+=inputs.get(i).value*weights.get(i);
-			}
-			output+=bias;
-			
+		if(activation==NeuralNetwork.STEP_FUNCTION) {
 			if(output>=0.5) {
 				output=1;
 			}
@@ -67,17 +34,46 @@ public class Neuron {
 			}
 		}
 		else if(activation==NeuralNetwork.RELU_FUNCTION) {
-			for(int i=0;i<inputs.size();i++) {
-				output+=inputs.get(i).value*weights.get(i);
-			}
-			output+=bias;
-			
 			if(output<=0) {
 				output=0;
 			}
 			else {
 				
 			}
+		}
+		else if(activation==NeuralNetwork.TANH_FUNCTION) {
+			output=Math.tanh(output);
+		}
+		
+		value=output;
+		return output;
+	}
+	
+	public double calculateOutput(ArrayList<Neuron>inputs) {
+		double output=0;
+		for(int i=0;i<inputs.size();i++) {
+			output+=inputs.get(i).value*weights.get(i);
+		}
+		output+=bias;
+		
+		if(activation==NeuralNetwork.STEP_FUNCTION) {
+			if(output>=0.5) {
+				output=1;
+			}
+			else {
+				output=0;
+			}
+		}
+		else if(activation==NeuralNetwork.RELU_FUNCTION) {
+			if(output<=0) {
+				output=0;
+			}
+			else {
+				
+			}
+		}
+		else if(activation==NeuralNetwork.TANH_FUNCTION) {
+			output=Math.tanh(output);
 		}
 		value=output;
 		return output;
