@@ -68,11 +68,19 @@ public class NeuralNetwork {
 			errors[i] = labels[i] - outputs[i];
 		}
 		
+		double hiddenErrors[][] = new double[layers.size()][];
+		for(int i = layers.size() - 1; i >= 0; i--) {
+			hiddenErrors[i] = new double[layers.get(i).getNeurons().size()];
+		}
 		for(int i = layers.size() - 1; i >= 0; i--) {
 			if(i == layers.size() - 1) {
 				for(int ii = 0; ii < layers.get(i).getNeurons().size(); ii++) {
 					if(i > 0) {
 						layers.get(i).getNeurons().get(ii).backpropagation(layers.get(i - 1), errors[ii], learningRate);
+						
+						for(int iii = 0; iii < layers.get(i).getNeurons().get(ii).getWeights().size(); iii++) {
+							hiddenErrors[i - 1][iii] += (layers.get(i).getNeurons().get(ii).getWeights().get(iii) / layers.get(i).getNeurons().get(ii).getWeightSum()) * errors[ii];
+						}
 					}
 					else {
 						layers.get(i).getNeurons().get(ii).backpropagation(inputs, errors[ii], learningRate);
@@ -80,6 +88,22 @@ public class NeuralNetwork {
 					
 				}
 			}
+			else {
+				for(int ii = 0; ii < layers.get(i).getNeurons().size(); ii++) {
+					
+					if(i > 0) {
+						layers.get(i).getNeurons().get(ii).backpropagation(layers.get(i - 1), hiddenErrors[i][ii], learningRate);
+						
+						for(int iii = 0; iii < layers.get(i).getNeurons().get(ii).getWeights().size(); iii++) {
+							hiddenErrors[i - 1][iii] += (layers.get(i).getNeurons().get(ii).getWeights().get(iii) / layers.get(i).getNeurons().get(ii).getWeightSum()) * hiddenErrors[i][ii];
+						}
+					}
+					else {
+						layers.get(i).getNeurons().get(ii).backpropagation(inputs, hiddenErrors[i][ii], learningRate);
+					}
+				}
+			}
+			
 		}
 		
 	}
