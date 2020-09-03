@@ -80,30 +80,27 @@ public class Neuron {
 	}
 	
 	public void train(double inputs[],double label,double learningRate) {
-		double output=calculateOutput(inputs);
-		double error=label-output;
-		for(int i=0;i<inputs.length;i++) {
-			weights.set(i, weights.get(i)+(error*inputs[i]*learningRate));
+		double output = calculateOutput(inputs);
+		double error = label - output;
+		for(int i = 0;i < inputs.length; i++) {
+			weights.set(i, weights.get(i) + (error * inputs[i] * learningRate));
 		}
-		bias=bias+error*learningRate;
+		bias = bias + error * learningRate;
 	}
-	
-	
-	
 	
 	
 	public void print() {
 		if(activation==0) {
-			System.out.println("activation: "+"no activation");
+			System.out.println("activation: " + "no activation");
 		}
 		if(activation==NeuralNetwork.STEP_FUNCTION) {
-			System.out.println("activation: "+"STEP_FUNCTION");
+			System.out.println("activation: " + "STEP_FUNCTION");
 		}
 		
 		System.out.println("bias: "+bias);
 		System.out.println("WEIGHTS");
-		for(int i=0;i<weights.size();i++) {
-			System.out.println("weight"+i+": "+weights.get(i));
+		for(int i = 0;i < weights.size(); i++) {
+			System.out.println("weight" + i + ": " + weights.get(i));
 		}
 		System.out.println("");
 	}
