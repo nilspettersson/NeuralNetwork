@@ -96,6 +96,16 @@ public class Neuron {
 		bias = bias + error * learningRate;
 	}
 	
+	//the layer parameter should be the input layer of the current neuron.
+	public void backpropagation(Layer layer, double error, double learningRate) {
+		double output = calculateOutput(layer.getNeurons());
+		for(int i = 0;i < layer.getNeurons().size(); i++) {
+			weights.set(i, weights.get(i) + (error * layer.getNeurons().get(i).getValue() * learningRate));
+		}
+		bias = bias + error * learningRate;
+	}
+	
+	
 	public double getWeightSum() {
 		double sum = 0;
 		for(int i = 0; i < weights.size(); i++) {

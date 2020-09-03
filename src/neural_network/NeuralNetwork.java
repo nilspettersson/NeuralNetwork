@@ -61,9 +61,29 @@ public class NeuralNetwork {
 		
 	}
 	
-	
-	
-	
+	public void train(double inputs[], double labels[], double learningRate) {
+		double outputs[] = feedForward(inputs);
+		double errors[] = new double[labels.length];
+		for(int i = 0; i < errors.length; i++) {
+			errors[i] = labels[i] - outputs[i];
+		}
+		
+		for(int i = layers.size() - 1; i >= 0; i--) {
+			if(i == layers.size() - 1) {
+				for(int ii = 0; ii < layers.get(i).getNeurons().size(); ii++) {
+					if(i > 0) {
+						layers.get(i).getNeurons().get(ii).backpropagation(layers.get(i - 1), errors[ii], learningRate);
+					}
+					else {
+						layers.get(i).getNeurons().get(ii).backpropagation(inputs, errors[ii], learningRate);
+					}
+					
+				}
+			}
+		}
+		
+	}
+
 	
 	
 	public void mutate(double amount) {
