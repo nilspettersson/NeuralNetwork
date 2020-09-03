@@ -81,10 +81,10 @@ public class NeuralNetwork {
 	
 	
 	public void print() {
-		System.out.println("outputs size: "+layers.get(layers.size()-1).getNeurons().size());
-		for(int i=0;i<layers.size();i++) {
-			System.out.println("layer "+i+" size: "+layers.get(i).getNeurons().size());
-			for(int ii=0;ii<layers.get(i).getNeurons().size();ii++) {
+		System.out.println("outputs size: " + layers.get(layers.size() - 1).getNeurons().size());
+		for(int i = 0;  i < layers.size(); i++) {
+			System.out.println("Layer " + i + "  Neuron count: " + layers.get(i).getNeurons().size());
+			for(int ii = 0;ii < layers.get(i).getNeurons().size(); ii++) {
 				layers.get(i).getNeurons().get(ii).print();
 			}
 			System.out.println("");
