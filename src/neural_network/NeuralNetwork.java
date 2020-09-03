@@ -16,9 +16,6 @@ public class NeuralNetwork {
 	}
 	
 	
-	
-	
-	
 	public NeuralNetwork copy() {
 		NeuralNetwork nnCopy=new NeuralNetwork(this.getInputSize());
 		for(int i=0;i<layers.size();i++) {
@@ -32,10 +29,6 @@ public class NeuralNetwork {
 		}
 		return nnCopy;
 	}
-	
-	
-	
-	
 	
 	
 	
@@ -67,6 +60,10 @@ public class NeuralNetwork {
 		return output;
 		
 	}
+	
+	
+	
+	
 	
 	
 	public void mutate(double amount) {

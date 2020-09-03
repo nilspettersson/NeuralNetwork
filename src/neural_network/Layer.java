@@ -9,11 +9,10 @@ public class Layer {
 	private int activation;
 	public Layer(int size, int activation,int inputSize) {
 		this.activation=activation;
-		for(int i=0;i<size;i++) {
+		for(int i = 0; i < size; i++) {
 			neurons.add(new Neuron(inputSize, activation));
 		}
 	}
-	
 
 	public ArrayList<Neuron> getNeurons() {
 		return neurons;
@@ -30,8 +29,5 @@ public class Layer {
 	public void setActivation(int activation) {
 		this.activation = activation;
 	}
-	
-	
-	
 
 }

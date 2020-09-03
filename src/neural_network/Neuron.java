@@ -88,6 +88,14 @@ public class Neuron {
 		bias = bias + error * learningRate;
 	}
 	
+	public double getWeightSum() {
+		double sum = 0;
+		for(int i = 0; i < weights.size(); i++) {
+			sum += weights.get(i);
+		}
+		return sum;
+	}
+	
 	
 	public void print() {
 		if(activation==0) {
