@@ -88,6 +88,14 @@ public class Neuron {
 		bias = bias + error * learningRate;
 	}
 	
+	public void backpropagation(double inputs[],double error,double learningRate) {
+		double output = calculateOutput(inputs);
+		for(int i = 0;i < inputs.length; i++) {
+			weights.set(i, weights.get(i) + (error * inputs[i] * learningRate));
+		}
+		bias = bias + error * learningRate;
+	}
+	
 	public double getWeightSum() {
 		double sum = 0;
 		for(int i = 0; i < weights.size(); i++) {
