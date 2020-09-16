@@ -31,13 +31,21 @@ public class NeuralNetwork {
 		return nnCopy;
 	}
 	
-	public void setWeights(double weight, double bias) {
+	public void setWeights(double minWeight, double maxWeight) {
 		for(int i = 0;i < layers.size(); i++) {
 			for(int ii = 0; ii < layers.get(i).getNeurons().size(); ii++) {
 				for(int iii = 0; iii < layers.get(i).getNeurons().get(ii).getWeights().size(); iii++) {
-					layers.get(i).getNeurons().get(ii).getWeights().set(iii, weight);
+					double dif = maxWeight - minWeight;
+					layers.get(i).getNeurons().get(ii).getWeights().set(iii, (Math.random() * dif) + minWeight);
 				}
-				layers.get(i).getNeurons().get(ii).setBias(bias);
+			}
+		}
+	}
+	public void setbias(double minBias, double maxBias) {
+		for(int i = 0;i < layers.size(); i++) {
+			for(int ii = 0; ii < layers.get(i).getNeurons().size(); ii++) {
+				double dif = maxBias - minBias;
+				layers.get(i).getNeurons().get(ii).setBias((Math.random() * dif) + minBias);
 			}
 		}
 	}

@@ -9,7 +9,7 @@ public class NeuralnetTest1 {
 	public static void main(String[] args) {
 		NeuralNetwork nn=new NeuralNetwork(2);
 		nn.addLayer(1, NeuralNetwork.LOG_FUNCTION);
-		nn.setWeights(0, 0);
+		nn.setWeights(0, 1);
 		nn.print();
 
 		
