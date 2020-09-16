@@ -6,6 +6,7 @@ public class NeuralNetwork {
 	public static final int STEP_FUNCTION=1;
 	public static final int RELU_FUNCTION=2;
 	public static final int TANH_FUNCTION=3;
+	public static final int LOG_FUNCTION=4;
 	
 	private int inputSize;
 	
@@ -30,7 +31,16 @@ public class NeuralNetwork {
 		return nnCopy;
 	}
 	
-	
+	public void setWeights(double weight, double bias) {
+		for(int i = 0;i < layers.size(); i++) {
+			for(int ii = 0; ii < layers.get(i).getNeurons().size(); ii++) {
+				for(int iii = 0; iii < layers.get(i).getNeurons().get(ii).getWeights().size(); iii++) {
+					layers.get(i).getNeurons().get(ii).getWeights().set(iii, weight);
+				}
+				layers.get(i).getNeurons().get(ii).setBias(bias);
+			}
+		}
+	}
 	
 	public void addLayer(int size, int activation) {
 		if(layers.size()==0) {
